@@ -37,3 +37,7 @@ Route::group(['prefix' => 'user',  'middleware' => 'auth'], function(){
         return view('user/index');
     });
 });
+
+Route::get('/detail', function () {
+    return view('details');
+});

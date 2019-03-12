@@ -136,6 +136,6 @@
             </div>
         </div>
     </div>
-</div><!--login-dashboard->
+</div>
 @endsection
 
