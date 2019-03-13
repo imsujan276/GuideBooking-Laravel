@@ -18,12 +18,14 @@ class CreateUsersTable extends Migration
             $table->string('role')->default('user');
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('username')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('image')->default('default.jpg');
             $table->string('city');
-            $table->string('country');
-            $table->string('language')->default('English');
+            $table->string('country')->default('Nepal');
+            $table->string('language')->default('Nepali, English');
+            $table->integer('has_license')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','city', 'country', 'image', 'city', 'country', 'language'
+        'username' ,'name', 'email', 'password','city', 'country', 'image', 'city', 'country', 'language'
     ];
 
     /**
@@ -36,4 +36,25 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    protected $appends = array('avgrate');
+
+    public function getAvgrateAttribute(){
+        return round($this->guideFeedback->avg('rate'), 0);
+    }
+
+    public function guideProfile(){
+        return $this->hasOne('App\GuideProfile');
+    }
+
+    public function guideFeedback() 
+    {
+        return $this->hasMany('App\guideFeedback', 'to');
+    }
+
+    public function touristArea() 
+    {
+        return $this->hasMany('App\touristArea');
+    }
 }

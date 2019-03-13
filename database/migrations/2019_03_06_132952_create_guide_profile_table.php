@@ -15,11 +15,12 @@ class CreateGuideProfileTable extends Migration
     {
         Schema::create('guide_profile', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('user_id');
             $table->integer('rate_per_day');
             $table->string('certificate_image')->nullable();
             $table->integer('availability_status')->default(1);
             $table->text('skill_experience');
-            $table->string('languages');
+            // $table->string('languages');
             $table->string('tour_date');
             $table->timestamps();
         });

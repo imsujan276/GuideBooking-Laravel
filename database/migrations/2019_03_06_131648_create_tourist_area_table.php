@@ -16,8 +16,9 @@ class CreateTouristAreaTable extends Migration
         Schema::create('tourist_area', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
+            $table->string('slug');
             $table->text('description');
-            $table->string('image')->nullable();
+            $table->string('image')->default('default.jpg');
             $table->string('city');
             $table->string('country');
             $table->integer('user_id');

@@ -9,34 +9,29 @@
     <link rel="apple-touch-icon" href="img/apple-icon.png">
     <link rel="icon" href="img/favicon.png">
     <title>
-        {{ config('app.name', 'Laravel') }} - @yield('title')
+        {{ config('app.name', 'Laravel') }}
     </title>
     <!--     Fonts and icons     -->
+    <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="{{ asset('css/material-dashboard.css?v=2.0.0') }}">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <!-- <link rel="stylesheet" href="{{ asset('css/material-dashboard.css?v=2.0.0') }}"> -->
+    <link rel="stylesheet" href="{{ asset('css/mysTyle.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/agency.css') }}">
 
     <script src="{{ asset('js/core/jquery.min.js') }}"></script>
 </head>
 
 <body class="">
-    <div class="wrapper">
-        <div class="main-panel">
-            <!-- Navbar -->
                 @include('layouts.navbar')
-            <!-- Navbar end -->
 
-            <div class="content">
-                <div class="container-fluid">
+
+                @include('errors')
+
                     @yield('content')
-                </div>
-            </div>
 
 
             @include('layouts.footer')
-        </div>
-    </div>
 </body>
 <!--   Core JS Files   -->
 <script src="{{ asset('js/core/popper.min.js') }}"></script>

@@ -58,7 +58,7 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'city' => ['required', 'string', 'max:255'],
             'country' => ['required', 'string', 'max:255'],
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:20048',
         ]);
     }
 
@@ -70,8 +70,11 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {   
+        
         $imageName = time().'.'.$data['image']->getClientOriginalExtension();
-        $data['image']->move(public_path('images'), $imageName);
+        $data['image']->move(public_path('images/user'), $imageName);
+
+        $username = strstr($data['email'], '@', true);
 
         if(isset($data['isGuide'])){
             return User::create([
@@ -82,7 +85,8 @@ class RegisterController extends Controller
                 'country' => $data['country'],
                 'language' => $data['language'],
                 'image' => $imageName,
-                'role' => 'guide'
+                'role' => 'guide',
+                'username' => $username
             ]);
         }
         else{
@@ -94,6 +98,7 @@ class RegisterController extends Controller
                 'country' => $data['country'],
                 'language' => $data['language'],
                 'image' => $imageName,
+                'username' => $username
             ]);
         }
     }

@@ -12,7 +12,12 @@
             <div class="sidebar-wrapper">
                 <ul class="nav">
 
-                    @if(Auth::user()->role == 'admin')
+                        <li class="nav-item active ">
+                            <a class="nav-link" href="/">
+                                <i class="material-icons">home</i>
+                                <p>Home</p>
+                            </a>
+                        </li>
 
                         <li class="nav-item active ">
                             <a class="nav-link" href="/home">
@@ -20,6 +25,8 @@
                                 <p>Dashboard</p>
                             </a>
                         </li>
+
+                    @if(Auth::user()->role == 'admin')
 
                         <li class="nav-item active ">
                             <a class="nav-link" href="/admin/editProfile">
@@ -28,13 +35,6 @@
                         </li>
                         
                     @else
-
-                        <li class="nav-item active ">
-                            <a class="nav-link" href="/home">
-                                <i class="material-icons">dashboard</i>
-                                <p>Dashboard</p>
-                            </a>
-                        </li>
 
                         <li class="nav-item active ">
                             <a class="nav-link" href="/user/editProfile">
