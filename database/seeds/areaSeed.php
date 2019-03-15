@@ -17,24 +17,24 @@ class areaSeed extends Seeder
             'description' => 'This is the description',
             'city' => 'Kathmandu',
             'country' => 'Nepal',
-            'user_id' => '2',
-            'slug' => 'tourist_area'
+            'slug' => 'tourist_area',
+            'created_at' => date("Y-m-d H:i:s") ,
         ]);
         DB::table('tourist_area')->insert([
             'title' => 'tourist area 2',
             'description' => 'This is the description',
             'city' => 'Pokhara',
             'country' => 'Nepal',
-            'user_id' => '2',
-            'slug' => 'tourist_area_2'
+            'slug' => 'tourist_area_2',
+            'created_at' => date("Y-m-d H:i:s") ,
         ]);
         DB::table('tourist_area')->insert([
             'title' => 'tourist area 3',
             'description' => 'This is the description',
             'city' => 'Bhaktapur',
             'country' => 'Nepal',
-            'user_id' => '3',
-            'slug' => 'tourist_area_3'
+            'slug' => 'tourist_area_3',
+            'created_at' => date("Y-m-d H:i:s") ,
         ]);
         $this->command->info('tourist_area created');
     }

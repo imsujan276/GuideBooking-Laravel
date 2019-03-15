@@ -80,20 +80,6 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="country" class="col-md-4 col-form-label text-md-right">{{ __('Country') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="country" type="text" disabled value="Nepal" class="form-control{{ $errors->has('country') ? ' is-invalid' : '' }}" name="country" placeholder="Country" required>
-
-                                @if ($errors->has('country'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('country') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
                             <label for="language" class="col-md-4 col-form-label text-md-right">{{ __('Language') }}</label>
 
                             <div class="col-md-6">
@@ -111,7 +97,7 @@
                             <label for="isGuide" class="col-md-4 col-form-label text-md-right">{{ __('Sign Up As a Guide?') }}</label>
 
                             <div class="col-md-6">
-                                <input id="isGuide" type="checkbox" value="{{ old('isGuide') }}" class="form-control" name="isGuide">
+                                <input id="isGuide" type="checkbox" class="form-control" name="isGuide">
                             </div>
                         </div>
 

@@ -44,7 +44,6 @@ class userSeed extends Seeder
             'certificate_image' => 'default.jpg',
             'skill_experience' => ' Lorem epsum Lorem epsum Lorem epsum Lorem epsum Lorem epsum Lorem epsum ',
             'created_at' => date("Y-m-d H:i:s") ,
-            'tour_date' => date("Y-m-d H:i:s") ,
         ]);
         $this->command->info('guide_profile created with login: testguide');
 
@@ -67,7 +66,6 @@ class userSeed extends Seeder
             'certificate_image' => 'default.jpg',
             'skill_experience' => ' Lorem epsum Lorem epsum Lorem epsum Lorem epsum Lorem epsum Lorem epsum ',
             'created_at' => date("Y-m-d H:i:s") ,
-            'tour_date' => date("Y-m-d H:i:s") ,
         ]);
         $this->command->info('guide_profile created with login: testguide');
 

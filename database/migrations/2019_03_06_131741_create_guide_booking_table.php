@@ -24,6 +24,7 @@ class CreateGuideBookingTable extends Migration
             $table->string('time');
             $table->integer('number_of_people');
             $table->string('type_of_tour');
+            $table->string('evidence')->nullable();
             $table->timestamps();
         });
     }

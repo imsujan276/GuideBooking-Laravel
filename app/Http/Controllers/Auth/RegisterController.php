@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\GuideProfile;
 
 class RegisterController extends Controller
 {
@@ -57,7 +58,6 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'city' => ['required', 'string', 'max:255'],
-            'country' => ['required', 'string', 'max:255'],
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:20048',
         ]);
     }
@@ -70,36 +70,34 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {   
-        
         $imageName = time().'.'.$data['image']->getClientOriginalExtension();
         $data['image']->move(public_path('images/user'), $imageName);
 
         $username = strstr($data['email'], '@', true);
 
+        $user = new User([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+                'city' => $data['city'],
+                'language' => $data['language'],
+                'image' => $imageName,
+                'username' => $username
+        ]);
+
         if(isset($data['isGuide'])){
-            return User::create([
-                'name' => $data['name'],
-                'email' => $data['email'],
-                'password' => Hash::make($data['password']),
-                'city' => $data['city'],
-                'country' => $data['country'],
-                'language' => $data['language'],
-                'image' => $imageName,
-                'role' => 'guide',
-                'username' => $username
-            ]);
+            $user->role = 'guide';
         }
-        else{
-            return User::create([
-                'name' => $data['name'],
-                'email' => $data['email'],
-                'password' => Hash::make($data['password']),
-                'city' => $data['city'],
-                'country' => $data['country'],
-                'language' => $data['language'],
-                'image' => $imageName,
-                'username' => $username
-            ]);
+
+        $user->save();
+
+        if(isset($data['isGuide'])){
+            $userId = $user->id;
+            $profile = new GuideProfile();
+            $profile->user_id = $userId;
+            $profile->save();
         }
+        
+        return $user;
     }
 }

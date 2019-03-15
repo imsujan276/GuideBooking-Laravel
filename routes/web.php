@@ -7,7 +7,7 @@ Route::get('/guides', 'PublicController@guides')->name('guides');
 Route::get('/search', 'PublicController@search');
 
 Route::get('/user-detail/{username}', 'PublicController@userdetails');
-Route::get('/tour/{user_id}/{slug}', 'PublicController@tourdetails');
+Route::get('/tour/{slug}', 'PublicController@tourdetails');
 
 Route::post('/booking-request', 'PublicController@bookingRequest');
 

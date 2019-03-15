@@ -9,36 +9,31 @@ use App\TouristArea;
 use App\User;
 use App\GuideBooking;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\BookingRequestEmail;
+
 class PublicController extends Controller
 {
     public function index(){
         $touristAreas = TouristArea::skip(0)->take(6)->inRandomOrder()->get();
         $guides = User::where('role', 'guide')->skip(0)->take(6)->inRandomOrder()->get();
-        // return $touristAreas;
+        // return $guides;
         return view('welcome', compact('touristAreas', 'guides'));
     }
 
     public function userdetails($username){
-
         $guide = User::where('username', $username)
                         ->with('guideProfile')
                         ->with('guideFeedback')
-                        ->with('touristArea')
                         ->first();
         $avgRate =  round($guide->guideFeedback->avg('rate'), 0);
         return view('userdetails', compact('guide', 'avgRate'));
     }
 
-    public function tourdetails($user_id, $slug){
-        $tour = TouristArea::where('user_id', $user_id)
-                                ->where('slug', $slug)
+    public function tourdetails($slug){
+        $tour = TouristArea::where('slug', $slug)
                                 ->first();
-        $guide = User::where('id', $user_id)
-                        ->with('guideFeedback')
-                        ->with('guideProfile')
-                        ->first();
-        $avgRate =  round($guide->guideFeedback->avg('rate'), 0);
-        return view('tourdetails', compact('guide', 'avgRate', 'tour'));
+        return view('tourdetails', compact('tour'));
     }
 
     public function tours(){
@@ -62,11 +57,19 @@ class PublicController extends Controller
             $arg = $request->s;
 
             if($type== 'guide'){
-                return User::where('role', 'guide') 
-                            -> where('name', 'like', '%' . $arg. '%')
-                            ->orWhere('username', 'like', '%' . $arg. '%')
-                            ->with('guideProfile')
-                            ->paginate(15);
+                $response = User::where('role', 'guide');
+                if(isset($request->s)){
+                    $response-> where('name', 'like', '%' . $arg. '%')->orWhere('username', 'like', '%' . $arg. '%');
+                }
+                if(isset($request->city)){
+                    $response-> where('city', 'like', '%' . $request->city. '%');
+                }
+                if(isset($request->language)){
+                    $response-> where('language', 'like', '%' . $request->language. '%');
+                }
+                return $response->with('guideProfile')
+                                ->paginate(15);
+                            
             }
             else if($type== 'tour'){
                 return TouristArea::where('title', 'like', '%' . $arg. '%')
@@ -93,6 +96,7 @@ class PublicController extends Controller
             'peoples' => 'required|integer|min:0',
             'tourType' => 'required',
             'description' => 'required| min:10 |max: 500',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:20048',
 
         ], [
             'date.required' => 'Name is required',
@@ -109,7 +113,24 @@ class PublicController extends Controller
         $booking->number_of_people = $request->peoples;
         $booking->type_of_tour = $request->tourType;
         $booking->description = $request->description;
+
+        if(isset($request->evidence)){
+            $imageName = time().'.'.$request->evidence->getClientOriginalExtension();
+            $request->evidence->move(public_path('images/booking'), $imageName);
+            $booking->evidence = $imageName;
+        }
         $booking->save();
+
+        $guide = User::find($request->to);
+        $data['booking'] = $booking;
+        $data['guide'] = $guide;
+        $data['user'] = Auth::user();
+        $data['guide_email'] = $guide->email;
+
+
+        Mail::to($guide->email)->send(new BookingRequestEmail($data));
+
+        return $data;
         return back()->with('success', 'Booking request has been sent successfully.');
     }
 }

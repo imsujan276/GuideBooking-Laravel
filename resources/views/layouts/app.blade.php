@@ -9,7 +9,7 @@
     <link rel="apple-touch-icon" href="img/apple-icon.png">
     <link rel="icon" href="img/favicon.png">
     <title>
-        {{ config('app.name', 'Laravel') }} - @yield('title')
+        Guide Booking System
     </title>
     <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
 

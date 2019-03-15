@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\User;
 
 class TouristArea extends Model
 {
@@ -14,20 +13,6 @@ class TouristArea extends Model
         'description', 
         'image',
         'city', 
-        'country', 
-        'user_id'
+        'country'
     ];
-
-    protected $appends = array('username', 'user');
-
-    public function getUserAttribute(){
-        return User::find($this->user_id)->name;
-    }
-    public function getUsernameAttribute(){
-        return User::find($this->user_id)->username;
-    }
-
-    public function user(){
-        return $this->hasOne('App\User');
-    }
 }

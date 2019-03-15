@@ -21,7 +21,6 @@ class CreateTouristAreaTable extends Migration
             $table->string('image')->default('default.jpg');
             $table->string('city');
             $table->string('country');
-            $table->integer('user_id');
             $table->timestamps();
         });
     }
