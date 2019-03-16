@@ -14,14 +14,12 @@
 
                         <li class="nav-item active ">
                             <a class="nav-link" href="/">
-                                <i class="material-icons">home</i>
-                                <p>Home</p>
+                                <p>View Website</p>
                             </a>
                         </li>
 
                         <li class="nav-item active ">
                             <a class="nav-link" href="/home">
-                                <i class="material-icons">dashboard</i>
                                 <p>Dashboard</p>
                             </a>
                         </li>
@@ -62,7 +60,6 @@
                             <a class="nav-link" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                <i class="material-icons">unarchive</i>
                                 <p> {{ __('Logout') }}</p>
                             </a>
                         </li>

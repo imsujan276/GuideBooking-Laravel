@@ -30,13 +30,13 @@ class HomeController extends Controller
         // Check user role
         switch ($role) {
             case 'admin':
-                    return view('admin/index');
+                    return redirect()->to('admin/');
                 break;
             case 'guide':
-                    return view('guide/index');
+                    return view('guide/');
                 break; 
             default:
-                    return view('user/index'); 
+                    return view('user/'); 
                 break;
         }
 

@@ -9,10 +9,18 @@ use App\User;
 use App\TouristArea;
 use App\GuideBooking;
 
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Input;
+
 class adminController extends Controller
 {
     public function index(){
-        return view('admin/index');
+        $users = User::where('role', 'user')->count();
+        $guides = User::where('role', 'guide')->count();
+        $bookings = GuideBooking::count();
+        $tours = TouristArea::count();
+        // return $data;
+        return view('admin/index', compact('users', 'guides','bookings','tours'));
     }
 
     public function profile(){
@@ -24,9 +32,40 @@ class adminController extends Controller
         $tours = TouristArea::get();
         return view('admin/list', compact('tours'));
     }
+
+    public function addTour(Request $request){
+        $request->validate([
+            'title' => 'required|min:10| max: 150',
+            'description' => 'required| min:10 |max: 500',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:20048',
+            'city' => 'required|min:1| max: 50',
+            'country' => 'required|min:1| max: 50',
+        ]);
+
+        $area = new TouristArea();
+        $area->title = $request->title;
+        $area->slug = Str::slug($request->title , '-');
+        $area->description = $request->description;
+        $area->city = $request->city;
+        $area->country = $request->country;
+        
+        if(Input::hasFile('image')) {
+            $imageName = time().'.'.$request->file('image')->getClientOriginalExtension();
+            $request->file('image')->move(public_path('images/touristarea'), $imageName);
+            $area->image = $imageName;
+        }else{
+            $area->image = "default.jpg";
+        }
+        
+        $area->save();
+
+        return back()->with('success', 'Tourist Area Added Successfully.');
+    }
+
+
     public function deletetours($id){
         TouristArea::find($id)->delete();
-        return back()->with('success', 'Tourist Area Deleted.');
+        return back()->with('success', 'Tourist Area Deleted Successfully.');
     }
 
     public function users(){
@@ -35,9 +74,14 @@ class adminController extends Controller
         // return $users;
         return view('admin/list', compact('users'));
     }
+    public function deleteuser($id){
+        User::find($id)->delete();
+        return back()->with('success', 'User Deleted Successfully.');
+    }
 
     public function bookings(){
-        $bookings =  GuideBooking::where('status', 1)->get();
+        $bookings =  GuideBooking::get();
+        // return $bookings;
         return view('admin/list', compact('bookings'));
     }
 

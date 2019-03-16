@@ -16,7 +16,8 @@
 @if(isset($tours))
         <div class="card">
             <div class="card-header card-header-primary">
-                <h4 class="card-title">All Tourist Areas</h4>
+                <h4 class="card-title" style="float:left">All Tourist Areas</h4>
+                <span class="btn btn-info" style="float:right" data-toggle="modal" data-target="#addTours">Add</span>
             </div>
             <div class="card-body">
             <div class="table-responsive">
@@ -33,6 +34,9 @@
                                                 </th>
                                                 <th>
                                                 	Country
+                                                </th>
+                                                <th>
+                                                	Image
                                                 </th>
                                                 <th>
                                                 	Created At
@@ -57,6 +61,12 @@
                                                     </td>
                                                     <td>
                                                         {{$m->country}} 
+                                                    </td>
+                                                    <td>
+
+                                                        <a href="{{asset('images/touristarea').'/'.$m->image}}" target="_blank">
+                                                    	    {{ $m->image}}
+                                                        </a>
                                                     </td>
                                                     <td>
                                                     	{{ $m->created_at}}
@@ -168,7 +178,9 @@
                                                                 @endif
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                                                                <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                                                                <a href="/admin/deleteuser/{{$m->id}}" class="btn btn-danger" >Delete</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -194,16 +206,22 @@
                                         <table class="table" id="bookings" width="100%">
                                             <thead class=" text-primary">
                                                 <th>
-                                                    Title
+                                                    From
                                                 </th>
                                                 <th>
-                                                    Description
+                                                    To
                                                 </th>
                                                 <th>
-                                                    City
+                                                    Tour Date
                                                 </th>
                                                 <th>
-                                                	Country
+                                                	Type
+                                                </th>
+                                                <th>
+                                                	Status
+                                                </th>
+                                                <th>
+                                                	Evidence
                                                 </th>
                                                 <th>
                                                 	Created At
@@ -215,16 +233,32 @@
 
                                                 <tr>
                                                     <td>
-                                                        {{$m->title}}
+                                                        {{$m->fromname}}
                                                     </td>
                                                     <td>
-                                                        {{$m->description}}
+                                                        {{$m->toname}}
                                                     </td>
                                                     <td>
-                                                        {{$m->city}} 
+                                                        {{$m->tour_date}} {{$m->time}} - {{$m->days}} Days
                                                     </td>
                                                     <td>
-                                                        {{$m->country}} 
+                                                        {{$m->type_of_tour}} ({{$m->number_of_people}})  
+                                                    </td>
+                                                    <td>
+                                                        @if($m->status == -1)
+                                                            Rejected
+                                                        @endif
+                                                        @if($m->status == 0)
+                                                            Pending 
+                                                        @endif
+                                                        @if($m->status == 1)
+                                                            Accepted
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        <a href="{{asset('images/booking').'/'.$m->evidence}}" target="_blank">
+                                                    	    {{ $m->evidence}}
+                                                        </a>
                                                     </td>
                                                     <td>
                                                     	{{ $m->created_at}}
@@ -244,6 +278,64 @@
 </div>
 
 
+<!-- Modal -->
+<div class="modal fade" id="addTours" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Request Guide Booking</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="post" action="/admin/add/tour" enctype="multipart/form-data">
+        @csrf
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="inputCity">Title</label>
+                    <input type="text" name="title" class="form-control" id="inputCity" placeholder = "Title" required>
+                </div>
+            </div>
+            <br>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">City </label>
+                    <input type="text" class="form-control" id="inputEmail4" placeholder="City" name="city" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Country </label>
+                    <input type="text" class="form-control" id="inputEmail4" placeholder="Country" name="country" required>
+                </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="image"> Image <span  style="font-size:12px"> </span></label>
+                <input id="image" type="file" class="form-control" name="image" required>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="inputAddress">Description</label>
+                <textarea class="form-control" id="inputAddress" rows="5" name="description" placeholder="Write something for the guide." REQUIRED></textarea>
+            </div>
+            
+        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Send Request</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<style>
+.form-group input[type=file] {
+    opacity: 1 !important;
+    position: unset !important;
+    z-index: 1 !important;
+}
+</style>
 
 <script>
 $(document).ready(function() {

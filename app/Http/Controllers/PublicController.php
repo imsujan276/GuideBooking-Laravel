@@ -137,9 +137,9 @@ class PublicController extends Controller
         $data['guide_email'] = $guide->email;
 
 
-        Mail::to($guide->email)->send(new BookingRequestEmail($data));
+        // Mail::to($guide->email)->send(new BookingRequestEmail($data));
 
-        return $data;
+        // return $data;
         return back()->with('success', 'Booking request has been sent successfully.');
     }
 }
