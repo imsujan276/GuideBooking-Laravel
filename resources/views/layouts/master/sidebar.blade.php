@@ -27,9 +27,23 @@
                         </li>
 
                     @if(Auth::user()->role == 'admin')
-
                         <li class="nav-item active ">
-                            <a class="nav-link" href="/admin/editProfile">
+                            <a class="nav-link" href="/admin/tours">
+                                <p>All Tourist Areas</p>
+                            </a>
+                        </li>
+                        <li class="nav-item active ">
+                            <a class="nav-link" href="/admin/users">
+                                <p>All Guides</p>
+                            </a>
+                        </li>
+                        <li class="nav-item active ">
+                            <a class="nav-link" href="/admin/bookings">
+                                <p>All Bookings</p>
+                            </a>
+                        </li>
+                        <li class="nav-item active ">
+                            <a class="nav-link" href="/admin/profile">
                                 <p>Edit Profile</p>
                             </a>
                         </li>
@@ -37,7 +51,7 @@
                     @else
 
                         <li class="nav-item active ">
-                            <a class="nav-link" href="/user/editProfile">
+                            <a class="nav-link" href="/user/profile">
                                 <p>Edit Profile</p>
                             </a>
                         </li>

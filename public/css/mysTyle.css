@@ -45,12 +45,6 @@ ul li {
     width: 50%;
     display: flex;
     justify-content: center;
-    /* background: #f3f3f3;
-    padding: 40px;
-    border: 2px solid #b7b2b2;
-    -webkit-box-shadow: 6px 10px 5px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 6px 10px 5px 0px rgba(0,0,0,0.75);
-    box-shadow: 6px 10px 5px 0px rgba(0,0,0,0.75); */
 }
 .login-dashboard p {
     color: #3a1585;
@@ -155,4 +149,10 @@ ul li {
 }
 .full-detail-section p strong {
   display: block;
+}
+
+/*------User List--------*/
+.tour-list {
+    margin: 30px auto;
+    border: 1px solid #ddd;
 }

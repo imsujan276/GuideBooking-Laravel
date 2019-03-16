@@ -38,16 +38,20 @@ class PublicController extends Controller
 
     public function tours(){
         $tours = TouristArea::
-            paginate(15);
-        return $tours;
+            paginate(5);
+
+            // return $tours;
+        return view('tours', compact('tours'));
     }
 
     public function guides(){
         $users = User::with('guideFeedback')
             ->where('role', 'guide')
             ->with('guideProfile')
-            ->paginate(15);
-        return $users;
+            ->paginate(5);
+        // return $users;
+
+        return view('guides', compact('users'));
     }
 
 
@@ -67,15 +71,20 @@ class PublicController extends Controller
                 if(isset($request->language)){
                     $response-> where('language', 'like', '%' . $request->language. '%');
                 }
-                return $response->with('guideProfile')
-                                ->paginate(15);
+                $users = $response->with('guideProfile')
+                                ->paginate(5);
+
+                return view('guides', compact('users'));
                             
             }
             else if($type== 'tour'){
-                return TouristArea::where('title', 'like', '%' . $arg. '%')
+                $tours = TouristArea::where('title', 'like', '%' . $arg. '%')
                             ->orWhere('city', 'like', '%' . $arg. '%')
                             ->orWhere('country', 'like', '%' . $arg. '%')
-                            ->paginate(15);
+                            ->paginate(5);
+
+                return view('tours', compact('tours'));
+
             }
             else{
                 return redirect()->route('tours');

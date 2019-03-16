@@ -56,64 +56,6 @@
   </div>
 </div>
 
-<script>
-$(function () {
-    "use strict";
-    
-    $("img").click(function () {
-        var $src = $(this).attr("src");
-        $(".show").fadeIn();
-        $(".img-show img").attr("src", $src);
-    });
-    
-    $("span, .overlay").click(function () {
-        $(".show").fadeOut();
-    });
-    
-});
-</script>
-<style>
-
-.show{
-    z-index: 999;
-    display: none;
-}
-.show .overlay{
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,.66);
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-.show .img-show{
-    width: 800px;
-    height: 500px;
-    background: #FFF;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    overflow: hidden
-}
-.img-show span{
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 99;
-    cursor: pointer;
-}
-.img-show img{
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-/*End style*/
-
-</style>
-
 </html>
 
 
