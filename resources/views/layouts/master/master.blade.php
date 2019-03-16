@@ -16,8 +16,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
     <link rel="stylesheet" href="{{ asset('css/material-dashboard.css?v=2.0.0') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('dataTable/datatables.min.css') }}">
 
     <script src="{{ asset('js/core/jquery.min.js') }}"></script>
+    <!-- Datatables js -->
+    <script src="{{ asset('dataTable/datatables.min.js') }}"></script>
 </head>
 
 <body class="">
@@ -52,8 +55,6 @@
 <script src="{{ asset('js/plugins/arrive.min.js') }}" type="text/javascript"></script>
 <!--  Notifications Plugin, full documentation here: http://bootstrap-notify.remabledesigns.com/    -->
 <script src="{{ asset('js/plugins/bootstrap-notify.js') }}"></script>
-<!-- Material Dashboard Core initialisations of plugins and Bootstrap Material Design Library -->
-<script src="{{ asset('js/material-dashboard.js?v=2.0.0') }}"></script>
 
 </html>
 

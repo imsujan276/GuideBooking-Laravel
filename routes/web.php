@@ -16,12 +16,20 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function(){
-	Route::get('/', function () {
-        return view('admin/index');
-    });
+    Route::get('/', 'AdminController@index');
+    Route::get('/tours', 'AdminController@tours');
+    Route::post('/add/tour', 'AdminController@addTour');
+    Route::get('/deletetours/{id}', 'AdminController@deletetours');
+    Route::get('/users', 'AdminController@users');
+    Route::get('/deleteuser/{id}', 'AdminController@deleteuser');
+    Route::get('/bookings', 'AdminController@bookings');
+    Route::get('/profile', 'AdminController@profile');
+    Route::post('/updateProfile', 'AdminController@updateProfile');
+    Route::post('/changePassword', 'AdminController@changePassword');
 });
 
 Route::group(['prefix' => 'guide',  'middleware' => 'auth'], function(){
+    Route::get('/', 'AdminController@index');
 	Route::get('/', function () {
         return view('guide/index');
     });

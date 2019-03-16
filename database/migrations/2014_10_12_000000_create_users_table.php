@@ -25,7 +25,6 @@ class CreateUsersTable extends Migration
             $table->string('city');
             $table->string('country')->default('Nepal');
             $table->string('language')->default('Nepali, English');
-            $table->integer('has_license')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

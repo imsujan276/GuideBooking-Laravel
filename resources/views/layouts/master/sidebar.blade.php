@@ -14,22 +14,34 @@
 
                         <li class="nav-item active ">
                             <a class="nav-link" href="/">
-                                <i class="material-icons">home</i>
-                                <p>Home</p>
+                                <p>View Website</p>
                             </a>
                         </li>
 
                         <li class="nav-item active ">
                             <a class="nav-link" href="/home">
-                                <i class="material-icons">dashboard</i>
                                 <p>Dashboard</p>
                             </a>
                         </li>
 
                     @if(Auth::user()->role == 'admin')
-
                         <li class="nav-item active ">
-                            <a class="nav-link" href="/admin/editProfile">
+                            <a class="nav-link" href="/admin/tours">
+                                <p>All Tourist Areas</p>
+                            </a>
+                        </li>
+                        <li class="nav-item active ">
+                            <a class="nav-link" href="/admin/users">
+                                <p>All Guides</p>
+                            </a>
+                        </li>
+                        <li class="nav-item active ">
+                            <a class="nav-link" href="/admin/bookings">
+                                <p>All Bookings</p>
+                            </a>
+                        </li>
+                        <li class="nav-item active ">
+                            <a class="nav-link" href="/admin/profile">
                                 <p>Edit Profile</p>
                             </a>
                         </li>
@@ -37,7 +49,7 @@
                     @else
 
                         <li class="nav-item active ">
-                            <a class="nav-link" href="/user/editProfile">
+                            <a class="nav-link" href="/user/profile">
                                 <p>Edit Profile</p>
                             </a>
                         </li>
@@ -48,7 +60,6 @@
                             <a class="nav-link" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                <i class="material-icons">unarchive</i>
                                 <p> {{ __('Logout') }}</p>
                             </a>
                         </li>
