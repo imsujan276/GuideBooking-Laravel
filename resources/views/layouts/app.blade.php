@@ -30,6 +30,17 @@
                 @yield('content')
 
 
+
+                @if($bottomAd->status == 1)
+                        <div class="container">
+                            @if($bottomAd->isBanner == 1)
+                                <img src="{{asset('images/ad').'/'.$bottomAd->image}}" class="img-fluid">
+                            @else
+                                {!! html_entity_decode($bottomAd->adcode) !!}
+                            @endif
+                        </div>
+                    @endif
+
             @include('layouts.footer')
         </div>
     </div>

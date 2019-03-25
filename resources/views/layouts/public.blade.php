@@ -28,7 +28,31 @@
 
                 @include('errors')
 
+                @if(Request::is('user-detail/*') || Request::is('tour/*'))
+                    @if($topAd->status == 1)
+                        <div class="container">
+                            @if($topAd->isBanner == 1)
+                                <img src="{{asset('images/ad').'/'.$topAd->image}}" class="img-fluid">
+                            @else
+                                {!! html_entity_decode($topAd->adcode) !!}
+                            @endif
+                        </div>
+                    @endif
+                 @endif
+
                     @yield('content')
+
+
+
+                    @if($bottomAd->status == 1)
+                        <div class="container">
+                            @if($bottomAd->isBanner == 1)
+                                <img src="{{asset('images/ad').'/'.$bottomAd->image}}" class="img-fluid">
+                            @else
+                                {!! html_entity_decode($bottomAd->adcode) !!}
+                            @endif
+                        </div>
+                    @endif
 
 
             @include('layouts.footer')
@@ -45,16 +69,6 @@
 <script src="{{ asset('js/plugins/bootstrap-notify.js') }}"></script>
 <!-- Material Dashboard Core initialisations of plugins and Bootstrap Material Design Library -->
 <script src="{{ asset('js/material-dashboard.js?v=2.0.0') }}"></script>
-
-
-
-<div class="show">
-  <div class="overlay"></div>
-  <div class="img-show">
-    <span>X</span>
-    <img src="">
-  </div>
-</div>
 
 </html>
 

@@ -17,6 +17,7 @@ class CreateGuideFeedbackTable extends Migration
             $table->bigIncrements('id');
             $table->string('from');
             $table->string('to');
+            $table->string('for');
             $table->string('rate')->default(0);
             $table->text('feedback');
             $table->timestamps();

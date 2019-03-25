@@ -33,10 +33,10 @@ class HomeController extends Controller
                     return redirect()->to('admin/');
                 break;
             case 'guide':
-                    return view('guide/');
+                    return redirect()->to('guide/');
                 break; 
             default:
-                    return view('user/'); 
+                    return redirect()->to('user/');
                 break;
         }
 

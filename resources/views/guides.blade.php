@@ -28,7 +28,7 @@
                 <div class="form-group" style="margin-right: 10px;">
                   <input type="text" name="language" placeholder="Enter Language">
                 </div>
-                <button type="submit" class="btn btn-success btn-large">Search</button>
+                <button type="submit" class="btn btn-success btn-large" style="padding: 16px;">Search</button>
               </form>
               </div>
             </div>
@@ -40,16 +40,17 @@
 
 
 <div class="detail-list">
+@if(!$users->isEmpty())
     @foreach($users as $user)
         <div class="container tour-list">
-            <a href="/tour/{{$user->slug}}" style="color: #000;text-decoration: none;">
+            <a href="/user-detail/{{$user->username}}" style="color: #000;text-decoration: none;">
             <div class="row" style="align-items:unset">
-                    <div class="col-lg-3 col-md-4 col-sm-12">
+                    <div class="col-lg-2 col-md-3 col-sm-12">
                         <div class="detail-image">
                             <img src="{{ asset('images/user').'/'.$user->image }}" style="max-height: 275px;">
                         </div>
                     </div>
-                    <div class="col-lg-9 col-md-8 col-sm-12">
+                    <div class="col-lg-10 col-md-9 col-sm-12">
                         <div class="detail-content">
                             <p style="font-size: 16px;">
                                 <strong style="font-size: 24px;text-transform: uppercase;">{{$user->name}}</strong> <br>
@@ -66,7 +67,6 @@
                                     @for($i=0; $i< $user->avgrate; $i++)
                                         <span class=""><i class="text-warning fa fa-star"></i></span>
                                     @endfor
-                                    <br>
                                 @else
                                     Not Rated Yet
                                 @endif
@@ -82,6 +82,12 @@
     <div class="container"> 
         {{ $users->links() }} 
     </div>
+
+  @else
+    <div class="container tour-list">
+      <h3 style="text-align: center"> NO record Found. </h3>
+    </div>
+  @endif
 </div>
 
 

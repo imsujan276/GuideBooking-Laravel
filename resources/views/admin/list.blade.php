@@ -170,10 +170,14 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 @if(isset($m->guideProfile))
-                                                                    <p>Rate Per Day : {{$m->guideProfile->rate_per_day}}</p>
-                                                                    <p>Availability Status : {{$m->guideProfile->availability_status}} </p>
-                                                                    <p>Certificate : <img src="{{asset('images/certificates').'/'.$m->guideProfile->certificate_image}}"></p>
-                                                                    <p> Skill and Experiences: </p>
+                                                                    <p><strong>Rate Per Day </strong>: {{$m->guideProfile->rate_per_day}}</p>
+                                                                    <p><strong>Availability Status </strong>: @if($m->guideProfile->availability_status == 1) Available @else In Progress @endif </p>
+                                                                    <p><strong>Certificate </strong>: </p> 
+                                                                            <a href="{{asset('images/certificates').'/'.$m->guideProfile->certificate_image}}" target="_blank" >
+                                                                                <img src="{{asset('images/certificates').'/'.$m->guideProfile->certificate_image}}" width="500px">
+                                                                            </a>
+                                                                           
+                                                                    <p>  <br><strong>Skill and Experiences </strong>: </p>
                                                                     {!! html_entity_decode($m->guideProfile->skill_experience) !!}
                                                                 @endif
                                                             </div>
@@ -231,7 +235,10 @@
 
                                                 @foreach($bookings as $m)
 
-                                                <tr>
+                                                <tr 
+                                                    @if($m->status <0) style="text-decoration: line-through;" @endif
+                                                    @if($m->status == 10) style="color: green;" @endif    
+                                                >
                                                     <td>
                                                         {{$m->fromname}}
                                                     </td>
@@ -242,7 +249,7 @@
                                                         {{$m->tour_date}} {{$m->time}} - {{$m->days}} Days
                                                     </td>
                                                     <td>
-                                                        {{$m->type_of_tour}} ({{$m->number_of_people}})  
+                                                        {{$m->type_of_tour}} ({{$m->number_of_people}} Peoples)  
                                                     </td>
                                                     <td>
                                                         @if($m->status == -1)
@@ -253,6 +260,12 @@
                                                         @endif
                                                         @if($m->status == 1)
                                                             Accepted
+                                                        @endif
+                                                        @if($m->status == -2)
+                                                            Cancelled
+                                                        @endif
+                                                        @if($m->status == 10)
+                                                            Completed
                                                         @endif
                                                     </td>
                                                     <td>
@@ -283,7 +296,7 @@
   <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Request Guide Booking</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Add Tourist Area</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -316,13 +329,13 @@
             <br>
             <div class="form-group">
                 <label for="inputAddress">Description</label>
-                <textarea class="form-control" id="inputAddress" rows="5" name="description" placeholder="Write something for the guide." REQUIRED></textarea>
+                <textarea class="form-control ckeditor HTML" id="inputAddress" rows="5" name="description" placeholder="Write something for the guide." REQUIRED></textarea>
             </div>
             
         </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Send Request</button>
+        <button type="submit" class="btn btn-primary">Add Tourist Area</button>
       </div>
       </form>
     </div>

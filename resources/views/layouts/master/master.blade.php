@@ -21,6 +21,12 @@
     <script src="{{ asset('js/core/jquery.min.js') }}"></script>
     <!-- Datatables js -->
     <script src="{{ asset('dataTable/datatables.min.js') }}"></script>
+
+    <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+    <script>
+        $('textarea').ckeditor();
+        // $('.textarea').ckeditor(); // if class is prefered.
+    </script>
 </head>
 
 <body class="">
@@ -55,6 +61,7 @@
 <script src="{{ asset('js/plugins/arrive.min.js') }}" type="text/javascript"></script>
 <!--  Notifications Plugin, full documentation here: http://bootstrap-notify.remabledesigns.com/    -->
 <script src="{{ asset('js/plugins/bootstrap-notify.js') }}"></script>
+
 
 </html>
 

@@ -17,6 +17,7 @@ class CreateGuideBookingTable extends Migration
             $table->bigIncrements('id');
             $table->string('from');
             $table->string('to');
+            $table->string('isFeedbackGiven')->default(0);
             $table->string('status')->default(0);
             $table->text('description');
             $table->string('tour_date');

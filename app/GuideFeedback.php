@@ -14,6 +14,7 @@ class GuideFeedback extends Model
         'to', 
         'rate',
         'feedback',
+        'for',
     ];
     protected $appends = array('username', 'user');
 

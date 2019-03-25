@@ -28,16 +28,17 @@
 
 
 <div class="detail-list">
+  @if(!$tours->isEmpty())
     @foreach($tours as $tour)
         <div class="container tour-list">
             <a href="/tour/{{$tour->slug}}" style="color: #000;text-decoration: none;">
             <div class="row" style="align-items:unset">
-                    <div class="col-lg-3 col-md-4 col-sm-12">
+                    <div class="col-lg-2 col-md-3 col-sm-12">
                         <div class="detail-image">
                             <img src="{{ asset('images/touristarea').'/'.$tour->image }}" style="max-height: 275px;">
                         </div>
                     </div>
-                    <div class="col-lg-9 col-md-8 col-sm-12">
+                    <div class="col-lg-10 col-md-9 col-sm-12">
                         <div class="detail-content">
                             <p style="font-size: 16px;">
                                 <strong style="font-size: 24px;text-transform: uppercase;">{{$tour->title}}</strong> <br>
@@ -53,6 +54,11 @@
     <div class="container"> 
         {{ $tours->links() }} 
     </div>
+  @else
+    <div class="container tour-list">
+      <h3 style="text-align: center"> NO record Found. </h3>
+    </div>
+  @endif
 </div>
 
 

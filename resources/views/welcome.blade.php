@@ -38,7 +38,7 @@
                 <div class="form-group" style="margin-right: 10px;">
                   <input type="text" name="language" placeholder="Enter Language">
                 </div>
-                <button type="submit" class="btn btn-success btn-large">Search</button>
+                <button type="submit" class="btn btn-success btn-large" style="padding: 16px;">Search</button>
               </form>
               </div>
             </div>
