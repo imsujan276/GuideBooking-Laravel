@@ -42,7 +42,8 @@
                         <div class="detail-content">
                             <p style="font-size: 16px;">
                                 <strong style="font-size: 24px;text-transform: uppercase;">{{$tour->title}}</strong> <br>
-                                {{ substr($tour->description,0, 100) }} <br>
+                                {{ strip_tags(substr($tour->description,0, 100)) }}
+                                 <br>
                                 {{$tour->city}}, {{$tour->country}}
                             </p>
                         </div>

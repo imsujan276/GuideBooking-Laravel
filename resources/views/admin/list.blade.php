@@ -54,7 +54,7 @@
                                                         {{$m->title}}
                                                     </td>
                                                     <td>
-                                                        {{$m->description}}
+                                                        {{strip_tags($m->description)}}
                                                     </td>
                                                     <td>
                                                         {{$m->city}} 
