@@ -69,7 +69,7 @@ class GuideController extends Controller
 
     public function profile(){
         $me = Auth::user();
-        $profile = GuideProfile::find(Auth::id())->first();
+        $profile = GuideProfile::where('user_id',Auth::id())->first();
         return view('guide/profile', compact('me', 'profile'));
     }
 

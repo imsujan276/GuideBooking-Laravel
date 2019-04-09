@@ -33,11 +33,13 @@
                                                     <input type="file" class="form-control" name="certificate_image" required>
                                                 </div>
                                             </div>
+                                            @if($profile->certificate_image)
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <img src="{{asset('images/certificates').'/'.$profile->certificate_image}}" width="200px">
                                                 </div>
                                             </div>
+                                            @endif
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label class="bmd-label-floating">Skill and Experience </label>
